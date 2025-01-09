@@ -1,0 +1,51 @@
+{
+    "583275bb": {
+        "name": "Alice",
+        "id": "202",
+        "registration_code": "583275bb",
+        "balance": 50,
+        "address": "d1a71992"
+    },
+    "f5f97ea3": {
+        "name": "Paulo",
+        "id": "307",
+        "registration_code": "f5f97ea3",
+        "balance": 45,
+        "address": "1bb73833"
+    },
+    "f3198e58": {
+        "name": "Carlos",
+        "id": "688",
+        "registration_code": "f3198e58",
+        "balance": 100,
+        "address": "788a64c8"
+    },
+    "d36772f4": {
+        "name": "Carol",
+        "id": "835",
+        "registration_code": "d36772f4",
+        "balance": 145,
+        "address": "312a87b3"
+    },
+    "724fd53a": {
+        "name": "Fernando",
+        "id": "865",
+        "registration_code": "724fd53a",
+        "balance": 65,
+        "address": "047585f1"
+    },
+    "b2be9b3d": {
+        "name": "Henrique",
+        "id": "636",
+        "registration_code": "b2be9b3d",
+        "balance": 125,
+        "address": "a43af2ac"
+    },
+    "37071e4d": {
+        "name": "Marcelo",
+        "id": "321",
+        "registration_code": "37071e4d",
+        "balance": 70,
+        "address": "e3a1b3a9"
+    }
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Ritcoin User Management</h1>
+    <img id="logo" src="{{ url_for('static', filename='ritcoin_logo.png') }}" alt="Ritcoin Logo">
+  </header>
+
+    <div id="add-user">
+        <h2>Add New User</h2>
+        <form id="addUserForm">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="number" id="balance" placeholder="Initial Balance" required>
+            <button type="submit">Add User</button>
+        </form>
+    </div>
+
+    <div id="user-list">
+        <h2>Users</h2>
+        <table id="users-table" border="1">
+          <thead>
+              <tr>
+                  <th>User Name</th>
+                  <th>Registration Code</th>
+                  <th>Balance</th>
+              </tr>
+          </thead>
+          <tbody id="users-tbody">
+              <!-- Rows will be added dynamically here -->
+          </tbody>
+      </table>
+    </div>
+
+    <div id="update-balance">
+        <h2>Update User's Balance</h2>
+        <form id="updateBalanceForm">
+            <input type="text" id="regcode_update" placeholder="RegCode" required>
+            <input type="number" id="new_balance" placeholder="Update Balance" required>
+            <button type="submit">Update Balance</button>
+        </form>
+    </div>
+
+    <script>
+        // Fetch and display users
+        async function fetchUsers() {
+            try {
+                const response = await fetch('/users');
+                const users = await response.json();
+
+                const userArray = Object.entries(users).map(([regCode, user]) => ({
+                    ...user,
+                    regCode
+                }));
+                userArray.sort((a, b) => b.balance - a.balance);
+
+                const userTableBody = document.getElementById('users-tbody');
+                userTableBody.innerHTML = ''; // Clear existing rows
+
+                userArray.forEach(user => {
+                    const tr = document.createElement('tr');
+                    const nameTd = document.createElement('td');
+                    nameTd.textContent = user.name;
+                    const codeTd = document.createElement('td');
+                    codeTd.textContent = user.regCode;
+                    const balanceTd = document.createElement('td');
+                    balanceTd.textContent = user.balance;
+                    tr.appendChild(nameTd);
+                    tr.appendChild(codeTd);
+                    tr.appendChild(balanceTd);
+                    userTableBody.appendChild(tr);
+                });
+            } catch (error) {
+                console.log("Error fetching users:", error);
+            }
+        }
+
+
+        // Add a new user
+        document.getElementById('addUserForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const balance = parseFloat(document.getElementById('balance').value);
+            await fetch('/add_user', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, balance })
+            })
+            .then(response => response.json())
+            .then(data => console.log(data));
+            fetchUsers(); // Refresh the user list
+        });
+
+        //Update user's balance
+        document.getElementById('update-balance').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const regcode = document.getElementById('regcode_update').value;
+            const newBalance = parseFloat(document.getElementById('new_balance').value);
+            const url = `/update_balance/${regcode}`; // Dynamically insert regcode
+            await fetch(url, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount: newBalance })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); 
+                alert(`Balance updated: ${data.new_balance}`);
+            })
+            .catch(error => {
+                console.error("Error updating balance:", error);
+            });
+            fetchUsers(); // Refresh the user list
+        });
+
+        // Initial fetch of users
+        fetchUsers();
+    </script>
+</body>
+</html>

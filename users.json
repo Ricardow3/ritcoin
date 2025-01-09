@@ -1,0 +1,37 @@
+{
+    "583275bb": {
+        "name": "Alice",
+        "registration_code": "583275bb",
+        "balance": 50
+    },
+    "f5f97ea3": {
+        "name": "Paulo",
+        "registration_code": "f5f97ea3",
+        "balance": 45
+    },
+    "f3198e58": {
+        "name": "Carlos",
+        "registration_code": "f3198e58",
+        "balance": 100
+    },
+    "d36772f4": {
+        "name": "Carol",
+        "registration_code": "d36772f4",
+        "balance": 145
+    },
+    "724fd53a": {
+        "name": "Fernando",
+        "registration_code": "724fd53a",
+        "balance": 65
+    },
+    "b2be9b3d": {
+        "name": "Henrique",
+        "registration_code": "b2be9b3d",
+        "balance": 125
+    },
+    "37071e4d": {
+        "name": "Marcelo",
+        "registration_code": "37071e4d",
+        "balance": 70
+    }
+}
