@@ -1,0 +1,2 @@
+# ritcoin
+ritcoin-project
